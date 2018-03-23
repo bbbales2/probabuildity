@@ -24,3 +24,11 @@ model {
 
   y ~ normal(cos(angle) * v0 * t1, sigma);
 }
+
+generated quantities {
+  // Only draw one new yhat per sample instead of N since they all have the same
+  // distribution
+  real yhat;
+  
+  yhat = normal_rng(cos(angle) * v0 * t1, sigma);
+}
